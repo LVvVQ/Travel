@@ -7,6 +7,102 @@
         <link rel="stylesheet" href="css/register.css">
 		<!--导入jquery-->
 		<script src="js/jquery-3.3.1.js"></script>
+		<script>
+			function checkUsername() {
+				var username = $("#username").val();
+				var reg_username = /^\w{6,20}$/;
+				var flag = reg_username.test(username);
+
+				if (flag){
+					$("#username").css("border","1px solid green");
+				}else{
+					$("#username").css("border","1px solid red");
+				}
+
+				return flag;
+			}
+
+			function checkPassword() {
+				var password = $("#password").val();
+				var reg_password = /^\w{8,20}$/;
+				var flag = reg_password.test(password);
+
+				if (flag){
+					$("#password").css("border","1px solid green");
+				}else{
+					$("#password").css("border","1px solid red");
+				}
+				return flag;
+			}
+
+			function checkEmail() {
+				var email = $("#email").val();
+				var reg_email = /^\w+@\w+\.\w+$/;
+				var flag = reg_email.test(email);
+
+				if (flag){
+					$("#email").css("border","1px solid green");
+				}else{
+					$("#email").css("border","1px solid red");
+				}
+
+				return flag;
+			}
+
+			function checkName() {
+				var name = $("#name").val();
+				var reg_name = /[\u4E00-\u9FA5]{2,5}(?:·[\u4E00-\u9FA5]{2,5})*/;
+				var flag = reg_name.test(name);
+
+				if (flag){
+					$("#name").css("border","1px solid green");
+				}else{
+					$("#name").css("border","1px solid red");
+				}
+
+				return flag;
+			}
+
+			function checkTel(){
+				var tel = $("#telephone").val();
+				var reg_tel = /^(13[0-9]|14[01456879]|15[0-3,5-9]|16[2567]|17[0-8]|18[0-9]|19[0-3,5-9])\d{8}$/;
+				var flag = reg_tel.test(tel);
+
+				if (flag){
+					$("#telephone").css("border","1px solid green");
+				}else{
+					$("#telephone").css("border","1px solid red");
+				}
+
+				return flag;
+			}
+
+			function checkCode(){
+				var checkcode = $("#check").val();
+
+				if (checkcode.length){
+					$("#check").css("border","");
+					return true;
+				}else{
+					$("#check").css("border","1px solid red");
+					return false;
+				}
+
+			}
+
+			$(function () {
+			    $("#registerForm").submit(function () {
+					return checkUsername()&&checkPassword()&&checkEmail()&&checkName()&&checkTel()&&checkCode();
+				});
+
+				$("#username").blur(checkUsername);
+				$("#password").blur(checkPassword);
+				$("#email").blur(checkEmail);
+				$("#name").blur(checkName);
+				$("#telephone").blur(checkTel);
+				$("#check").blur(checkCode);
+			})
+		</script>
     </head>
 	<body>
 	<!--引入头部-->
@@ -21,7 +117,8 @@
     			<div class="rg_form_center">
 					
 					<!--注册表单-->
-    				<form id="registerForm">
+					<!--FIXME: now this 'action="user"' is test-->
+    				<form id="registerForm" action="user">
 						<!--提交处理请求的标识符-->
 						<input type="hidden" name="action" value="register">
     					<table style="margin-top: 25px;">
@@ -38,7 +135,7 @@
     								<label for="password">密码</label>
     							</td>
     							<td class="td_right">
-    								<input type="text" id="password" name="password" placeholder="请输入密码">
+    								<input type="password" id="password" name="password" placeholder="请输入密码">
     							</td>
     						</tr>
     						<tr>
