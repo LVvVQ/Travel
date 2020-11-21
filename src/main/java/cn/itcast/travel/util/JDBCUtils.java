@@ -1,6 +1,7 @@
 package cn.itcast.travel.util;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 import java.io.IOException;
@@ -25,14 +26,12 @@ public class JDBCUtils {
 	// 2. 创建连接池对象
 	static {
 		// 加载配置文件中的数据
-		InputStream is = JDBCUtils.class.getClassLoader().getResourceAsStream("/druid.properties");
+		InputStream is = JDBCUtils.class.getClassLoader().getResourceAsStream("druid.properties");
 		Properties pp = new Properties();
 		try {
 			pp.load(is);
 			// 创建连接池，使用配置文件中的参数
 			ds = DruidDataSourceFactory.createDataSource(pp);
-		} catch (IOException e) {
-			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
