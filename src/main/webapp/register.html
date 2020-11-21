@@ -89,8 +89,20 @@
 				}
 			}
 
+			function checkBirthday() {
+				var birthday = $("#birthday").val();
+
+				if (birthday.length){
+					$("#birthday").css("border","1px solid green");
+					return true;
+				}else{
+					$("#birthday").css("border","1px solid red");
+					return false;
+				}
+			}
+
 			function everyOk(){
-				return checkUsername()&&checkPassword()&&checkEmail()&&checkName()&&checkTel()&&checkCode();
+				return checkUsername()&&checkPassword()&&checkEmail()&&checkName()&&checkTel()&&checkCode()&&checkBirthday();
 			}
 
 			$(function () {
@@ -113,6 +125,7 @@
 				$("#name").blur(checkName);
 				$("#telephone").blur(checkTel);
 				$("#check").blur(checkCode);
+				$("#birthday").blur(checkBirthday);
 			})
 		</script>
     </head>
