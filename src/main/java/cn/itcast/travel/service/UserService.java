@@ -16,4 +16,11 @@ public interface UserService {
      * @return 激活成功返回true,失败返回false
      */
     boolean active(String code);
+
+    /**
+     *
+     * @param user 登录用户
+     * @return 用户名密码正确返回对应用户对象,否在返回null
+     */
+    User login(User user);
 }

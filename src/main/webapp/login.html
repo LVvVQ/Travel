@@ -18,6 +18,37 @@
     <script src="js/angular.min.js"></script>
 	<!--导入jquery-->
 	<script src="js/jquery-3.3.1.js"></script>
+	<script>
+
+		function everyOk(){
+			var username = $("#username").val();
+			var password = $("#password").val();
+			var check = $("#check").val();
+
+			if (username.length  && password.length  && check.length ){
+				return true;
+			}else {
+				$("#errorMsg").html("账号/密码/验证码为空!");
+				return false;
+			}
+		}
+
+		$(function () {
+			$("#loginForm").submit(function () {
+				if (everyOk()) {
+					$.post("loginServlet", $(this).serialize(), function (data) {
+						if (data.flag) {
+							location.href = "index.html";
+						} else {
+							$("#errorMsg").html(data.errorMsg);
+							$("#checkImg").prop("src","checkCode?"+new Date().getTime());
+						}
+					})
+				}
+				return false;
+			})
+		})
+	</script>
 </head>
 
 <body>
@@ -37,13 +68,13 @@
 				
 				<!--登录错误提示消息-->
         		<div id="errorMsg" class="alert alert-danger" ></div>
-				<form id="loginForm" action="" method="post" accept-charset="utf-8">
+				<form id="loginForm" action="loginServlet" method="post" accept-charset="utf-8">
         			<input type="hidden" name="action" value="login"/>
-					<input name="username" type="text" placeholder="请输入账号" autocomplete="off">
-        			<input name="password" type="text" placeholder="请输入密码" autocomplete="off">
+					<input name="username" id="username" type="text" placeholder="请输入账号" autocomplete="off">
+        			<input name="password" id="password" type="password" placeholder="请输入密码" autocomplete="off">
         			<div class="verify">
-					<input name="check" type="text" placeholder="请输入验证码" autocomplete="off">
-					<span><img src="checkCode" alt="" onclick="changeCheckCode(this)"></span>
+					<input name="check" id="check" type="text" placeholder="请输入验证码" autocomplete="off">
+					<span><img id="checkImg" src="checkCode" alt="" onclick="changeCheckCode(this)"></span>
 					<script type="text/javascript">
 						//图片点击事件
 						function changeCheckCode(img) {
@@ -52,7 +83,7 @@
 					</script>
 			</div>
 			<div class="submit_btn">
-        				<button type="button">登录</button>
+        				<button type="submit" >登录</button>
         				<div class="auto_login">
         					<input type="checkbox" name="" class="checkbox">
         					<span>自动登录</span>

@@ -11,4 +11,6 @@ public interface UserDao {
      void updateStatus(User user);
 
      void save(User user);
+
+     User checkUsernameAndPassword(String username,String password);
 }

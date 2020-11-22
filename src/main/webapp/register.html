@@ -113,6 +113,7 @@
 								location.href = "register_ok.html";
 							}else{
 			        	    	$("#errorMsg").html(data.errorMsg);
+								$("#checkImg").prop("src","checkCode?"+new Date().getTime());
 							}
 						});
 					}
@@ -209,7 +210,7 @@
     							</td>
     							<td class="td_right check">
     								<input type="text" id="check" name="check" class="check">
-    								<img src="checkCode" height="32px" alt="" onclick="changeCheckCode(this)">
+    								<img id="checkImg" src="checkCode" height="32px" alt="" onclick="changeCheckCode(this)">
 									<script type="text/javascript">
 										//图片点击事件
 										function changeCheckCode(img) {
