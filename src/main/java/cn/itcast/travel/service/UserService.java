@@ -8,5 +8,12 @@ public interface UserService {
      * @param user 注册用户
      * @return 注册成功返回true,失败返回false
      */
-    public boolean register(User user);
+     boolean register(User user);
+
+    /**
+     *
+     * @param code 激活码
+     * @return 激活成功返回true,失败返回false
+     */
+    boolean active(String code);
 }
