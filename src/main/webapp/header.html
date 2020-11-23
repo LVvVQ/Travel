@@ -1,6 +1,6 @@
 <script>
     $(function () {
-        $.get("searchUserServlet",{},function (data) {
+        $.get("user/searchUser",{},function (data) {
             var msg = "欢迎回来," + data.username;
             $("#span_username").html(msg);
         });

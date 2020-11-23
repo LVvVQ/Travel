@@ -15,8 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.nio.channels.SeekableByteChannel;
-import java.sql.ResultSet;
 import java.util.Map;
 
 @WebServlet("/registerUserServlet")

@@ -5,7 +5,6 @@ import cn.itcast.travel.domain.User;
 import cn.itcast.travel.service.UserService;
 import cn.itcast.travel.service.impl.UserServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mysql.cj.ParseInfo;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.ServletException;
@@ -14,8 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.xml.stream.Location;
-import java.awt.image.ReplicateScaleFilter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;

@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
         userDao.save(user);
 
         //// FIXME: 2020/11/22 you should use your own project path
-        String content = "<a href = 'http://localhost:8080/travel/activeUserServlet?code="+user.getCode()+"'>点击激活邮箱[黑马旅游网]</a>";
+        String content = "<a href = 'http://localhost:8080/travel/user/active?code="+user.getCode()+"'>点击激活邮箱[黑马旅游网]</a>";
         MailUtils.sendMail(user.getEmail(),content,"激活邮件");
         return true;
     }

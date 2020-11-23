@@ -108,7 +108,7 @@
 			$(function () {
 			    $("#registerForm").submit(function () {
 			        if (everyOk()){
-			        	$.post("registerUserServlet",$(this).serialize(),function (data) {
+			        	$.post("user/register",$(this).serialize(),function (data) {
 			        	    if (data.flag){
 								location.href = "register_ok.html";
 							}else{
