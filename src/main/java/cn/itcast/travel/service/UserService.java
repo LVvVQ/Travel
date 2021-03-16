@@ -2,6 +2,10 @@ package cn.itcast.travel.service;
 
 import cn.itcast.travel.domain.User;
 
+/**
+ * @author  #L
+ * @date    2021/03/16
+ */
 public interface UserService {
     /**
      *

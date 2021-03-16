@@ -17,8 +17,13 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
+/**
+ * @author  #L
+ * @date    2021/03/16
+ */
 @WebServlet("/loginServlet")
 public class LoginServlet extends HttpServlet {
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String checkCode = request.getParameter("check");
         HttpSession session = request.getSession();
@@ -71,6 +76,7 @@ public class LoginServlet extends HttpServlet {
 
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         this.doPost(request,response);
     }
