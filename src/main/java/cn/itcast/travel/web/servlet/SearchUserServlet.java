@@ -9,8 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * @author  #L
+ * @date    2021/03/16
+ */
 @WebServlet("/searchUserServlet")
 public class SearchUserServlet extends HttpServlet {
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Object user = request.getSession().getAttribute("user");
         ObjectMapper mapper = new ObjectMapper();
@@ -18,6 +23,7 @@ public class SearchUserServlet extends HttpServlet {
         mapper.writeValue(response.getOutputStream(),user);
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         this.doPost(request,response);
     }

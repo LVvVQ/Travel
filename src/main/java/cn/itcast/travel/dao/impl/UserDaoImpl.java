@@ -6,6 +6,10 @@ import cn.itcast.travel.util.JDBCUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+/**
+ * @author  #L
+ * @date    2021/03/16
+ */
 public class UserDaoImpl implements UserDao {
 
     private JdbcTemplate jdbcTemplate = new JdbcTemplate(JDBCUtils.getDataSource());

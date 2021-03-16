@@ -7,6 +7,10 @@ import cn.itcast.travel.service.UserService;
 import cn.itcast.travel.util.MailUtils;
 import cn.itcast.travel.util.UuidUtil;
 
+/**
+ * @author  #L
+ * @date    2021/03/16
+ */
 public class UserServiceImpl implements UserService {
 
     private UserDao userDao = new UserDaoImpl();

@@ -8,6 +8,10 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+/**
+ * @author  #L
+ * @date    2021/03/16
+ */
 public class BaseServlet extends HttpServlet {
     /**
      * 分发任务

@@ -16,6 +16,10 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
+/**
+ * @author  #L
+ * @date    2021/03/16
+ */
 @WebServlet("/user/*")
 public class UserServlet extends BaseServlet {
     private ResultInfo resultInfo = new ResultInfo();

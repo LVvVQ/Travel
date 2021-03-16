@@ -17,8 +17,13 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
+/**
+ * @author  #L
+ * @date    2021/03/16
+ */
 @WebServlet("/registerUserServlet")
 public class RegisterUserServlet extends HttpServlet {
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         //校验验证码
@@ -64,6 +69,7 @@ public class RegisterUserServlet extends HttpServlet {
         response.getWriter().write(result_json);
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         this.doPost(request,response);
     }
