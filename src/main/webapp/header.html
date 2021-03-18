@@ -1,9 +1,20 @@
 <script>
     $(function () {
+        /*获取登录用户的用户名*/
         $.get("user/searchUser",{},function (data) {
             var msg = "欢迎回来," + data.username;
             $("#span_username").html(msg);
         });
+
+        //展示后端返回的分类列表
+        $.get("category/findAllCategory",{},function (data){
+            var lis = "<li class=\"nav-active\"><a href=\"index.html\">首页</a></li>";
+            for (var i = 0; i < data.length; i++) {
+                lis += '<li><a href="route_list.html">' + data[i].cname + '</a></li>';
+            }
+            lis += "<li><a href=\"favoriterank.html\">收藏排行榜</a></li>";
+            $("#category").html(lis);
+        })
     });
 </script>
 <!-- 头部 start -->
@@ -48,7 +59,8 @@
 <!-- 头部 end -->
  <!-- 首页导航 -->
 <div class="navitem">
-    <ul class="nav">
+    <ul id="category" class="nav">
+<!--
         <li class="nav-active"><a href="index.html">首页</a></li>
         <li><a href="route_list.html">门票</a></li>
         <li><a href="route_list.html">酒店</a></li>
@@ -59,5 +71,6 @@
         <li><a href="route_list.html">抱团定制</a></li>
         <li><a href="route_list.html">全球自由行</a></li>
         <li><a href="favoriterank.html">收藏排行榜</a></li>
+-->
     </ul>
 </div>
