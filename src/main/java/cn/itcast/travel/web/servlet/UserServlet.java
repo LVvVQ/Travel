@@ -4,6 +4,7 @@ import cn.itcast.travel.domain.ResultInfo;
 import cn.itcast.travel.domain.User;
 import cn.itcast.travel.service.UserService;
 import cn.itcast.travel.service.impl.UserServiceImpl;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.beanutils.BeanUtils;
 
@@ -37,7 +38,7 @@ public class UserServlet extends BaseServlet {
         if (checkcodeIsNullOrFalse(request)){
             resultInfo.setFlag(false);
             resultInfo.setErrorMsg("验证码错误");
-            sendResultJsonToResponse(resultInfo_to_json(resultInfo),response);
+            writeValue(resultInfo,response);
             return;
         }
 
@@ -54,7 +55,7 @@ public class UserServlet extends BaseServlet {
         }
 
         //将resultInfo对象转为json数据传回前端
-        sendResultJsonToResponse(resultInfo_to_json(resultInfo),response);
+        writeValue(resultInfo,response);
     }
 
     /**
@@ -94,7 +95,7 @@ public class UserServlet extends BaseServlet {
         if (checkcodeIsNullOrFalse(request)){
             resultInfo.setFlag(false);
             resultInfo.setErrorMsg("验证码错误");
-            sendResultJsonToResponse(resultInfo_to_json(resultInfo),response);
+            writeValue(resultInfo,response);
             return;
         }
 
@@ -119,7 +120,7 @@ public class UserServlet extends BaseServlet {
             resultInfo.setFlag(false);
             resultInfo.setErrorMsg("登录失败,账号或密码错误!");
         }
-        sendResultJsonToResponse(resultInfo_to_json(resultInfo),response);
+        writeValue(resultInfo,response);
     }
 
     /**
@@ -132,9 +133,7 @@ public class UserServlet extends BaseServlet {
     public void searchUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //响应回json格式的已登录用户信息
         Object user = request.getSession().getAttribute("user");
-        ObjectMapper mapper = new ObjectMapper();
-        response.setContentType("application/json; charset=UTF-8");
-        mapper.writeValue(response.getOutputStream(),user);
+        writeValue(user,response);
     }
 
     /**
@@ -165,25 +164,26 @@ public class UserServlet extends BaseServlet {
     }
 
     /**
-     * 将ResultInfo对象以json格式Response到前端
-     * @param json
+     * 直接将写入的对象序列化为json，并且写回客户端
+     * @param object
      * @param response
      * @throws IOException
      */
-    public void sendResultJsonToResponse(String json,HttpServletResponse response) throws IOException{
-        response.setContentType("application/json;charset=utf-8");
-        response.getWriter().write(json);
+    public void writeValue(Object object,HttpServletResponse response) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        response.setContentType("application/json; charset=UTF-8");
+        mapper.writeValue(response.getOutputStream(),object);
     }
 
     /**
-     * 将ResultInfo对象转为String
-     * @param resultInfo
-     * @return String类型的ResultInfo对象
-     * @throws IOException
+     * 将写入的对象序列化为json作为返回值
+     * @param object
+     * @return
+     * @throws JsonProcessingException
      */
-    public String  resultInfo_to_json(ResultInfo resultInfo) throws IOException{
+    public String writeValueAsString(Object object) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
-        return mapper.writeValueAsString(resultInfo);
+        return mapper.writeValueAsString(object);
     }
 
     /**
