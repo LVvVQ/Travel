@@ -37,7 +37,7 @@ public class UserServlet extends BaseServlet {
         if (checkcodeIsNullOrFalse(request)){
             resultInfo.setFlag(false);
             resultInfo.setErrorMsg("验证码错误");
-            sendResultJsonToResponse(resultInfo_to_json(resultInfo),response);
+            writeValue(resultInfo,response);
             return;
         }
 
@@ -54,7 +54,7 @@ public class UserServlet extends BaseServlet {
         }
 
         //将resultInfo对象转为json数据传回前端
-        sendResultJsonToResponse(resultInfo_to_json(resultInfo),response);
+        writeValue(resultInfo,response);
     }
 
     /**
@@ -94,7 +94,7 @@ public class UserServlet extends BaseServlet {
         if (checkcodeIsNullOrFalse(request)){
             resultInfo.setFlag(false);
             resultInfo.setErrorMsg("验证码错误");
-            sendResultJsonToResponse(resultInfo_to_json(resultInfo),response);
+            writeValue(resultInfo,response);
             return;
         }
 
@@ -119,7 +119,7 @@ public class UserServlet extends BaseServlet {
             resultInfo.setFlag(false);
             resultInfo.setErrorMsg("登录失败,账号或密码错误!");
         }
-        sendResultJsonToResponse(resultInfo_to_json(resultInfo),response);
+        writeValue(resultInfo,response);
     }
 
     /**
@@ -132,9 +132,7 @@ public class UserServlet extends BaseServlet {
     public void searchUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //响应回json格式的已登录用户信息
         Object user = request.getSession().getAttribute("user");
-        ObjectMapper mapper = new ObjectMapper();
-        response.setContentType("application/json; charset=UTF-8");
-        mapper.writeValue(response.getOutputStream(),user);
+        writeValue(user,response);
     }
 
     /**
@@ -162,28 +160,6 @@ public class UserServlet extends BaseServlet {
         String checkcode_server = (String) session.getAttribute("CHECKCODE_SERVER");
         session.removeAttribute("CHECKCODE_SERVER");
         return checkcode_server == null || !checkcode_server.equalsIgnoreCase(checkcode);
-    }
-
-    /**
-     * 将ResultInfo对象以json格式Response到前端
-     * @param json
-     * @param response
-     * @throws IOException
-     */
-    public void sendResultJsonToResponse(String json,HttpServletResponse response) throws IOException{
-        response.setContentType("application/json;charset=utf-8");
-        response.getWriter().write(json);
-    }
-
-    /**
-     * 将ResultInfo对象转为String
-     * @param resultInfo
-     * @return String类型的ResultInfo对象
-     * @throws IOException
-     */
-    public String  resultInfo_to_json(ResultInfo resultInfo) throws IOException{
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.writeValueAsString(resultInfo);
     }
 
     /**
