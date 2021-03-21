@@ -1,11 +1,12 @@
 package cn.itcast.travel.service.impl;
 
 import cn.itcast.travel.dao.CategoryDao;
-import cn.itcast.travel.dao.impl.CategoryImpl;
+import cn.itcast.travel.dao.impl.CategoryDaoImpl;
 import cn.itcast.travel.domain.Category;
 import cn.itcast.travel.service.CategoryService;
 import cn.itcast.travel.util.JedisUtil;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.Tuple;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,14 +17,15 @@ import java.util.Set;
  * @date 2021/03/18
  */
 public class CategoryServiceImpl implements CategoryService {
-    private CategoryDao categoryDao = new CategoryImpl();
+    private CategoryDao categoryDao = new CategoryDaoImpl();
 
     @Override
     public List<Category> findAllCategory() {
         //获取jedis客户端
         Jedis jedis = JedisUtil.getJedis();
         //使用sortedset排序查询redis中category中的数据
-        Set<String> categorySet = jedis.zrange("category", 0, -1);
+        //Set<String> categorySet = jedis.zrange("category", 0, -1);
+        Set<Tuple> categorySet = jedis.zrangeWithScores("category", 0, -1);
         List<Category> categoryList = null;
 
         if (categorySet==null || categorySet.size() == 0){
@@ -36,9 +38,10 @@ public class CategoryServiceImpl implements CategoryService {
         } else {
             //如果不为空,将set中的数据存储到List中
             categoryList = new ArrayList<Category>();
-            for (String name : categorySet) {
+            for (Tuple tuple : categorySet) {
                 Category category = new Category();
-                category.setCname(name);
+                category.setCname(tuple.getElement());
+                category.setCid((int)tuple.getScore());
                 categoryList.add(category);
             }
         }

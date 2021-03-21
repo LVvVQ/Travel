@@ -13,7 +13,7 @@ import java.util.List;
  * @author #L
  * @date 2021/03/18
  */
-public class CategoryImpl implements CategoryDao {
+public class CategoryDaoImpl implements CategoryDao {
 
     private JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
 
